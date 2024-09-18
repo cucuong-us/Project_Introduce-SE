@@ -11,5 +11,6 @@ public class home {
 	@RequestMapping("home")
 	public String homePage() {
 		return "home";
+		
 	}
 }
