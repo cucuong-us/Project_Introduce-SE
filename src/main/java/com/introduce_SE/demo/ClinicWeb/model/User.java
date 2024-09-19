@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 
 @Entity
 public class User {
+	
+	public User() {
+	}
 
 	public User(int id, String name, String username, String password, String sex, int yearOfBirth, String address,
 			String role) {
