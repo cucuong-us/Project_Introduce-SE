@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.introduce_SE.demo.ClinicWeb.dto.MyUserDetails;
 import com.introduce_SE.demo.ClinicWeb.model.User;
 import com.introduce_SE.demo.ClinicWeb.repository.UserRepository;
 
+@Service
 public class CustomUserDetailsService implements UserDetailsService	 {
 	@Autowired
 	private UserRepository userRepository;
