@@ -14,5 +14,9 @@ public class home {
 	@RequestMapping("/registration")
 	public String registrationPage() {
 		return "registration";
+  }
+	@RequestMapping("/")
+	public String welcome() {
+		return "home";
 	}
 }
