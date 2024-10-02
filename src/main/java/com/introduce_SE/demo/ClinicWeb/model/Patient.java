@@ -3,8 +3,6 @@ package com.introduce_SE.demo.ClinicWeb.model;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
@@ -14,7 +12,7 @@ public class Patient {
 		
 	}
 
-	public Patient(int id, String fullname, String sex, String address, int yearOfBirth, LocalDate date) {
+	public Patient(String id, String fullname, String sex, String address, int yearOfBirth, LocalDate date) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
@@ -25,8 +23,7 @@ public class Patient {
 	}
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private String id;
 	
 	private String fullname;
 	
@@ -38,11 +35,11 @@ public class Patient {
 	
 	private LocalDate date;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

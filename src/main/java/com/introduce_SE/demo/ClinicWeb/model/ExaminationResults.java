@@ -14,7 +14,7 @@ public class ExaminationResults {
 	
 	
 
-	public ExaminationResults(int id, Patient patient, String symptom, String disease) {
+	public ExaminationResults(String id, Patient patient, String symptom, String disease) {
 		super();
 		this.id = id;
 		this.patient = patient;
@@ -25,7 +25,7 @@ public class ExaminationResults {
 
 
 	@Id
-	private int id;
+	private String id;
 	
 	@ManyToOne
 	@JoinColumn(name="id", insertable = false, updatable = false)
@@ -35,11 +35,11 @@ public class ExaminationResults {
 	
 	private String disease;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

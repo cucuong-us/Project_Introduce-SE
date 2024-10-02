@@ -11,21 +11,21 @@ public class prescriptionId implements Serializable {
 		
 	}
 
-	public prescriptionId(int id, int idMedicine) {
+	public prescriptionId(String id, int idMedicine) {
 		super();
 		this.id = id;
 		this.idMedicine = idMedicine;
 	}
 
-	private int id;
+	private String id;
 	private int idMedicine;
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
