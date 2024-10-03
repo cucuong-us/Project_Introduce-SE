@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Phòng Mạch Tư Nhân</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="nav">
+        <ul class="nav_list">
+            <div class="nav_item" id="menuToggle">Menu</div>
+            <div class="nav_item" id="homeToggle">Trang chủ</div>
+        </ul>
+        <ul class="nav_list">
+            <li><button class="button login" id="loginIcon">Đăng nhập</button></li>
+            <li><button class="button logoff hidden" id="logoffIcon">Đăng xuất</button></li>
+        </ul>
+    </div>
+
+    <div class="Home" id="homePage">
+        <div class="hero-section">
+            <div class="overlay">
+                <h1>PHÒNG MẠCH TƯ NHÂN</h1>             
+            </div>
+        </div>
+    </div>
+    <div class="menu hidden" id="menu">
+        <div class="menu_item">Lập danh sách khám bệnh
+        </div>
+
+        <div class="menu_item">Tra cứu bệnh nhân</div>
+        <div class="menu_item">Lập báo cáo tháng</div>
+        <div class="menu_item">Thay đổi quy định</div>
+    </div>
+
+    <div class="login-container hidden" id="loginContainer">
+        <fieldset>
+            <legend>Đăng nhập</legend>
+            <div class="input-group">
+                <label for="username">Tên tài khoản</label>
+                <input type="text" id="username" placeholder="Nhập tên tài khoản" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+            </div>
+            <button class="login-button" id="loginButton">ĐĂNG NHẬP</button>
+            <div class="error-message" id="errorMessage"></div>
+        </fieldset>
+    </div>
+    <script>
+        const menu = document.getElementById('menu');
+        const homePage = document.getElementById('homePage');
+        const menuItems = document.querySelectorAll('.menu_item');
+        const logoffIcon = document.getElementById('logoffIcon');
+        const loginContainer = document.getElementById('loginContainer');
+        const errorMessage = document.getElementById('errorMessage');
+        const loginButton = document.getElementById('loginButton');
+        
+        
+        function addHidden(){
+            homePage.classList.add('hidden');
+            loginContainer.classList.add('hidden');
+            menuItems.forEach(function(el) {
+                    el.classList.remove('active');
+            });
+            menu.classList.add('hidden');
+        }
+        // Menu toggle
+        document.getElementById('menuToggle').onclick = function() {
+            menu.classList.toggle('hidden');
+        };
+        
+        // Home toggle
+        document.getElementById('homeToggle').onclick = function() {
+            addHidden();
+            homePage.classList.remove('hidden');
+        };
+        
+        // Login popup toggle
+        document.getElementById('loginIcon').onclick = function() {
+            addHidden();
+            loginContainer.classList.remove('hidden')
+        };
+        
+        // Login button
+        loginButton.onclick = function() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            if (!username || !password) {
+                errorMessage.textContent = "Vui lòng điền đầy đủ thông tin.";
+            } else if (username !== "admin" || password !== "123456") {
+                errorMessage.textContent = "Tên tài khoản hoặc mật khẩu không đúng.";
+            } else {
+                errorMessage.textContent = "";
+                alert("Đăng nhập thành công!");
+                loginIcon.classList.add('hidden');
+                logoffIcon.classList.remove('hidden');
+                loginContainer.classList.add('hidden');
+                homePage.classList.remove('hidden');
+            }
+        };
+        
+        // Logout button
+        logoffIcon.onclick = function() {
+            loginIcon.classList.remove('hidden');
+            logoffIcon.classList.add('hidden');
+            homePage.classList.add('hidden'); 
+            loginContainer.classList.add('hidden'); 
+            alert("Đã đăng xuất.");
+        };
+        
+        
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !loginContainer.classList.contains('hidden')) {
+                loginButton.click();
+            }
+        });
+        
+        menuItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                menuItems.forEach(function(el) {
+                    el.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+    
+</body>
+</html>
