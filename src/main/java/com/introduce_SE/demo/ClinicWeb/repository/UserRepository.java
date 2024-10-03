@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.introduce_SE.demo.ClinicWeb.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, String> {
 	public User findByUsername(String username);
 }

@@ -2,6 +2,7 @@ package com.introduce_SE.demo.ClinicWeb.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,14 @@ public class PatientService {
 	public Patient addPatient(Patient patient) {
 		patient.setId(generatePatientId());
 		patient.setDate(LocalDate.now());
-		System.out.print(patient.getFullname());
 		return patientRepository.save(patient);
 	}
 	
 	public List<Patient> findByDate(LocalDate date) {
 		return patientRepository.findByDate(date);
+	}
+	
+	public Optional<Patient> findById(String id) {
+		return patientRepository.findById(id);
 	}
 }

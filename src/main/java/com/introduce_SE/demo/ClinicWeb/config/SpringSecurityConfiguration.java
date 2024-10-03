@@ -39,7 +39,7 @@ public class SpringSecurityConfiguration {
     	.csrf(csrf->csrf.disable())
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/home").permitAll()// Cho phép truy cập vào /home mà không cần đăng nhập
-            .requestMatchers("/api/*").permitAll()            
+            .requestMatchers("/api/**").permitAll()            
             .anyRequest().authenticated()          // Mọi yêu cầu khác yêu cầu phải đăng nhập
         )
         .formLogin(login -> login 	// Cấu hình trang đăng nhập tùy chỉnh
