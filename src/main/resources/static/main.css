@@ -1,0 +1,8 @@
+h1 {
+	padding: 0 16px;
+	color: #fff;
+	background: red;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+}
