@@ -15,6 +15,6 @@ public class PrescriptionService {
 	private PrescriptionRepository prescriptionRepository;
 	
 	public List<Prescription>  findById(String id) {
-		return prescriptionRepository.findByprescriptionId_Id(id);
+		return prescriptionRepository.findById_Id(id);
 	}
 }
