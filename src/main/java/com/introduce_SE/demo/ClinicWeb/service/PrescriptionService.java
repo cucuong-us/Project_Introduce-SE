@@ -14,7 +14,11 @@ public class PrescriptionService {
 	@Autowired
 	private PrescriptionRepository prescriptionRepository;
 	
-	public List<Prescription>  findById(String id) {
-		return prescriptionRepository.findById_Id(id);
+	public List<Prescription>  findById(int idPatient) {
+		return prescriptionRepository.findByPatientId(idPatient);
+	}
+	
+	public Prescription save(Prescription p) {
+		return prescriptionRepository.save(p);
 	}
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.introduce_SE.demo.ClinicWeb.model.Patient;
 
 @Repository
-public interface PatientRepository extends JpaRepository<Patient, String>{
+public interface PatientRepository extends JpaRepository<Patient, Integer>{
 	public List<Patient> findByDate(LocalDate date);
-	public Optional<Patient> findById(String id);
+	public Optional<Patient> findByIdPatient(int id);
 }

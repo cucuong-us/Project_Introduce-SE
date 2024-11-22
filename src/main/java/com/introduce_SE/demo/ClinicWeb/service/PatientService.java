@@ -17,9 +17,9 @@ public class PatientService {
 	@Autowired
 	private PatientRepository patientRepository;
 	
-	public String generatePatientId() {
+	public int generatePatientId() {
 		long count = patientRepository.count();
-		return String.format("BN%06d", count + 1);
+		return (int) (9999+count);
 	}
 	
 	public Patient addPatient(Patient patient) {
@@ -32,7 +32,11 @@ public class PatientService {
 		return patientRepository.findByDate(date);
 	}
 	
-	public Optional<Patient> findById(String id) {
-		return patientRepository.findById(id);
+	public List<Patient> findAll() {
+		return patientRepository.findAll();
+	}
+	
+	public Optional<Patient> findById(int idPatient) {
+		return patientRepository.findByIdPatient(idPatient);
 	}
 }
