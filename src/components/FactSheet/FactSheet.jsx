@@ -1,5 +1,11 @@
+import { useEffect,useState } from "react";
+imp
 
 function FactSheet(patient) {
+    const [isExaminationResult,setExaminationResult]=useState({})
+    useEffect(()=>{
+        
+    },[])
     return (
         <>
             <div>
