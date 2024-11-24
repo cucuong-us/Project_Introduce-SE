@@ -1,6 +1,6 @@
 package com.introduce_SE.demo.ClinicWeb.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ExaminationResultsService {
 	@Autowired
 	private ExaminationResultsRepository examinationResultsRepository;
 	
-	public List<ExaminationResults> findByID(int idPatient) {
+	public Optional<ExaminationResults> findByID(int idPatient) {
 		return examinationResultsRepository.findByPatientId(idPatient);
 	}
 }

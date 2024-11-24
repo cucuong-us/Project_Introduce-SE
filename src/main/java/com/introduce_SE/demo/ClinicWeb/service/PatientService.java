@@ -19,7 +19,7 @@ public class PatientService {
 	
 	public int generatePatientId() {
 		long count = patientRepository.count();
-		return (int) (9999+count);
+		return (int) (10000+count);
 	}
 	
 	public Patient addPatient(Patient patient) {
@@ -37,6 +37,14 @@ public class PatientService {
 	}
 	
 	public Optional<Patient> findById(int idPatient) {
-		return patientRepository.findByIdPatient(idPatient);
+		return patientRepository.findById(idPatient);
+	}
+	 
+	public void deleteById(int idPatient) {
+		patientRepository.deleteById(idPatient);
+	}
+	
+	public List<Patient> searchPatients(Integer idPatient, String fullname, LocalDate date) {
+		return patientRepository.searchPatients(idPatient, fullname, date);
 	}
 }

@@ -14,7 +14,7 @@ public class PrescriptionService {
 	@Autowired
 	private PrescriptionRepository prescriptionRepository;
 	
-	public List<Prescription>  findById(int idPatient) {
+	public List<Prescription>  findByPatientId(int idPatient) {
 		return prescriptionRepository.findByPatientId(idPatient);
 	}
 	

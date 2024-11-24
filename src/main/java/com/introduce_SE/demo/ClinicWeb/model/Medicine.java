@@ -37,6 +37,14 @@ public class Medicine {
 	
 	private String medicineUsage;
 	
+	public void setIdMedicine(int idMedicine) {
+		this.idMedicine = idMedicine;
+	}
+
+	public int getIdMedicine() {
+		return idMedicine;
+	}
+
 	@OneToMany(mappedBy = "medicine")
 	private List<Prescription> prescriptions;
 
