@@ -1,45 +1,47 @@
 package com.introduce_SE.demo.ClinicWeb.model;
 
-import com.introduce_SE.demo.ClinicWeb.model.impl.prescriptionId;
-
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Prescription {
 	
+	public Prescription(int quantity, Patient patient, Medicine medicine) {
+		super();
+		this.quantity = quantity;
+		this.patient = patient;
+		this.medicine = medicine;
+	}
+
 	public Prescription() {
 		
 	}
 
-	public Prescription(prescriptionId id, Patient patient, int quantity) {
-		super();
-		this.id = id;
-		this.patient = patient;
-		this.quantity = quantity;
-	}
-
-	@EmbeddedId
-	private prescriptionId id;
-	
-	@ManyToOne
-	@JoinColumn(name="id", insertable = false, updatable = false)
-	private Patient patient;
-	
-	@ManyToOne
-	@JoinColumn(name="idMedicine", insertable = false, updatable = false)
-	private Medicine medicine;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	
 	private int quantity;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idPatient", insertable = false, updatable = false)
+	private Patient patient;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idMedicine", insertable = false, updatable = false)
+	private Medicine medicine;
 
-	public prescriptionId getId() {
-		return id;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setId(prescriptionId id) {
-		this.id = id;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public Patient getPatient() {
@@ -50,13 +52,14 @@ public class Prescription {
 		this.patient = patient;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public Medicine getMedicine() {
+		return medicine;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
 	}
+	
 	
 	
 }

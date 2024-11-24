@@ -1,29 +1,36 @@
 package com.introduce_SE.demo.ClinicWeb.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Patient {
 	
-	public Patient() {
-		
-	}
-
-	public Patient(String id, String fullname, String sex, String address, int yearOfBirth, LocalDate date) {
+	public Patient(int idPatient, String fullname, String sex, String address, int yearOfBirth, LocalDate date,
+			List<ExaminationResults> examinationResults, List<Prescription> prescriptions) {
 		super();
-		this.id = id;
+		this.idPatient = idPatient;
 		this.fullname = fullname;
 		this.sex = sex;
 		this.address = address;
 		this.yearOfBirth = yearOfBirth;
 		this.date = date;
+		this.examinationResults = examinationResults;
+		this.prescriptions = prescriptions;
+	}
+
+	public Patient() {
+		
 	}
 	
 	@Id
-	private String id;
+	@Column(name = "id_patient")
+	private int idPatient;
 	
 	private String fullname;
 	
@@ -34,13 +41,19 @@ public class Patient {
 	private int yearOfBirth;
 	
 	private LocalDate date;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<ExaminationResults> examinationResults;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<Prescription> prescriptions;
 
-	public String getId() {
-		return id;
+	public int getId() {
+		return idPatient;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId(int id) {
+		this.idPatient = id;
 	}
 
 	public String getFullname() {

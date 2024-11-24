@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.introduce_SE.demo.ClinicWeb.model.ExaminationResults;
 
 @Repository
-public interface ExaminationResultsRepository extends JpaRepository<ExaminationResults, String> {
-	public Optional<ExaminationResults> findById(String id);
+public interface ExaminationResultsRepository extends JpaRepository<ExaminationResults, Integer> {
+	public Optional<ExaminationResults> findByPatientId(int idPatient);
 }

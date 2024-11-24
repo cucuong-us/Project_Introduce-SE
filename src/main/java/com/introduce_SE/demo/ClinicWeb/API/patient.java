@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.introduce_SE.demo.ClinicWeb.dto.ExaminationResultsDTO;
@@ -38,18 +41,24 @@ public class patient {
 	@Autowired
 	private MedicineService medicineService;
 	
-	@PostMapping("/api/patient")
+	@PostMapping("/api/patients")
 	public Patient addNewPatient(@RequestBody Patient patient){
 		return patientService.addPatient(patient);
 	}
 	
 	@GetMapping("/api/patients")
-	public List<Patient> listPatient() {
-		return patientService.findByDate(LocalDate.now());
+	public List<Patient> listPatients() {
+		return patientService.findAll();
 	}
 	
+	@DeleteMapping("/api/patients/{id}")
+	public void deletePatient(@PathVariable int id) {
+		patientService.deleteById(id);
+	}
+	
+	
 	@GetMapping("api/examinationResults/{id}")
-	public ExaminationResultsDTO getExaminationResults(@PathVariable String id) {
+	public ExaminationResultsDTO getExaminationResults(@PathVariable int id) {
 		Optional<Patient> patient = patientService.findById(id);
 		ExaminationResultsDTO erdto = new ExaminationResultsDTO();
 		
@@ -62,19 +71,19 @@ public class patient {
 		if(er.isEmpty()) return erdto;
 		
 		erdto.setSymptom(er.get().getSymptom());
-		erdto.setDisease(er.get().getDisease());
+		erdto.setDisease(er.get().getDisease().getName());
 		return erdto;
 	}
 	
 	@GetMapping("api/prescription/{id}")
-	public List<PrescriptionDTO> listMedicine(@PathVariable String id) {
-		List<Prescription> ps = prescriptionService.findById(id);
+	public List<PrescriptionDTO> listMedicine(@PathVariable int id) {
+		List<Prescription> ps = prescriptionService.findByPatientId(id);
 		List<PrescriptionDTO> psdtos = new ArrayList<>(ps.size());
 		for(int i = 0; i < ps.size(); i++) {
 			PrescriptionDTO psdto = new PrescriptionDTO();
 			
 			psdto.setQuantity(ps.get(i).getQuantity());
-			Optional<Medicine> medicine = medicineService.findById(ps.get(i).getId().getIdMedicine());
+			Optional<Medicine> medicine = medicineService.findById(ps.get(i).getMedicine().getIdMedicine());
 			psdto.setNameOfMedicine(medicine.get().getNameOfMedicine());
 			psdto.setUnit(medicine.get().getUnit());
 			psdto.setMedicineUsage(medicine.get().getMedicineUsage());
@@ -83,5 +92,21 @@ public class patient {
 		}
 		
 		return psdtos;
+	}
+	
+	@PostMapping("api/prescription/{id}")
+	public Prescription addMedicine(@PathVariable int id, @RequestBody int idMedicine, @RequestBody int quantity) {
+		Prescription p = new Prescription();
+		p.getPatient().setId(id);
+		p.getMedicine().setIdMedicine(idMedicine);
+		p.setQuantity(quantity);
+		return prescriptionService.save(p);
+	}
+	
+	@GetMapping("api/patients/search")
+	public List<Patient> getPatient(@RequestParam(required=false) Integer id, 
+	@RequestParam(required=false) String fullname, 
+	@RequestParam(required=false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+		return patientService.searchPatients(id, fullname, date);
 	}
 }

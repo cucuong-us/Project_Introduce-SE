@@ -14,7 +14,7 @@ public class ExaminationResultsService {
 	@Autowired
 	private ExaminationResultsRepository examinationResultsRepository;
 	
-	public Optional<ExaminationResults> findByID(String id) {
-		return examinationResultsRepository.findById(id);
+	public Optional<ExaminationResults> findByID(int idPatient) {
+		return examinationResultsRepository.findByPatientId(idPatient);
 	}
 }
