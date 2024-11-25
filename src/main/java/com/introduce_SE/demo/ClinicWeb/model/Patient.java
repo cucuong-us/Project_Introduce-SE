@@ -52,8 +52,8 @@ public class Patient {
 		return idPatient;
 	}
 
-	public void setId(int id) {
-		this.idPatient = id;
+	public void setId(int idPatient) {
+		this.idPatient = idPatient;
 	}
 
 	public String getFullname() {
@@ -95,5 +95,23 @@ public class Patient {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
+
+	public List<ExaminationResults> getExaminationResults() {
+		return examinationResults;
+	}
+
+	public void setExaminationResults(List<ExaminationResults> examinationResults) {
+		this.examinationResults = examinationResults;
+	}
+
+	public List<Prescription> getPrescriptions() {
+		return prescriptions;
+	}
+
+	public void setPrescriptions(List<Prescription> prescriptions) {
+		this.prescriptions = prescriptions;
+	}
+
+	
 	
 }

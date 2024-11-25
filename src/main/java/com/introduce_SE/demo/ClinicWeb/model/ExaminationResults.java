@@ -29,11 +29,11 @@ public class ExaminationResults {
 	private String symptom;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="patient", insertable = false, updatable = false)
+	@JoinColumn(name="patient", referencedColumnName = "id_patient")
 	private Patient patient;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="disease", insertable = false, updatable = false)
+	@JoinColumn(name="disease", referencedColumnName = "id")
 	private Disease disease;
 
 	public String getSymptom() {
@@ -46,19 +46,13 @@ public class ExaminationResults {
 		this.symptom = symptom;
 	}
 
-
-
 	public Patient getPatient() {
 		return patient;
 	}
 
-
-
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-
-
 
 	public Disease getDisease() {
 		return disease;

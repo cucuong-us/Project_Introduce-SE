@@ -17,4 +17,8 @@ public class ExaminationResultsService {
 	public Optional<ExaminationResults> findByID(int idPatient) {
 		return examinationResultsRepository.findByPatientId(idPatient);
 	}
+	
+	public ExaminationResults addNewExaminationResults(ExaminationResults er) {
+		return examinationResultsRepository.save(er);
+	}
 }
