@@ -24,13 +24,21 @@ public class Disease {
 
 	@OneToMany(mappedBy="disease")
 	private List<ExaminationResults> examinationResults;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getId() {
-		return id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<ExaminationResults> getExaminationResults() {

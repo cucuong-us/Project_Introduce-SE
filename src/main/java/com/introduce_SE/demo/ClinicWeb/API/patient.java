@@ -21,6 +21,7 @@ import com.introduce_SE.demo.ClinicWeb.model.ExaminationResults;
 import com.introduce_SE.demo.ClinicWeb.model.Medicine;
 import com.introduce_SE.demo.ClinicWeb.model.Patient;
 import com.introduce_SE.demo.ClinicWeb.model.Prescription;
+import com.introduce_SE.demo.ClinicWeb.service.DiseaseService;
 import com.introduce_SE.demo.ClinicWeb.service.ExaminationResultsService;
 import com.introduce_SE.demo.ClinicWeb.service.MedicineService;
 import com.introduce_SE.demo.ClinicWeb.service.PatientService;
@@ -40,6 +41,9 @@ public class patient {
 	
 	@Autowired
 	private MedicineService medicineService;
+	
+	@Autowired
+	private DiseaseService diseaseService;
 	
 	@PostMapping("/api/patients")
 	public Patient addNewPatient(@RequestBody Patient patient){
@@ -75,6 +79,36 @@ public class patient {
 		return erdto;
 	}
 	
+	@PostMapping("api/examinationResults")
+	public ExaminationResults addExaminationResults(@RequestBody ExaminationResults er) {
+//		
+// 		@RequestBody Map<String, Object> request
+//		ExaminationResults er = new ExaminationResults();
+		
+//		int idPatient = er.getPatient().getId();
+//		Optional<Patient> patient = patientService.findById(idPatient);
+//		
+//		if(patient.isEmpty()) {
+//			return er;
+//		}
+//		er.setPatient(patient.get());
+//		int idDisease = (int) request.get("disease");
+//		System.out.println("Hello 2023");
+//		System.out.println(idDisease);
+//		Optional<Disease> disease = diseaseService.findById(idDisease);
+//		System.out.println("Hello 2024");
+//		
+//		if(disease.isEmpty()) {
+//			return er;
+//		}
+//		er.setDisease(disease.get());
+//		String symptom = (String) request.get("symptom");
+//		System.out.println(symptom);
+//		
+//		er.setSymptom(symptom);
+		return examinationResultsService.addNewExaminationResults(er);
+	}
+	
 	@GetMapping("api/prescription/{id}")
 	public List<PrescriptionDTO> listMedicine(@PathVariable int id) {
 		List<Prescription> ps = prescriptionService.findByPatientId(id);
@@ -87,7 +121,7 @@ public class patient {
 			psdto.setNameOfMedicine(medicine.get().getNameOfMedicine());
 			psdto.setUnit(medicine.get().getUnit());
 			psdto.setMedicineUsage(medicine.get().getMedicineUsage());
-			
+			psdto.setPrice(medicine.get().getPrice());
 			psdtos.add(psdto);
 		}
 		
