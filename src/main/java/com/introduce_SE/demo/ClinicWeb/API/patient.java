@@ -109,7 +109,7 @@ public class patient {
 		return examinationResultsService.addNewExaminationResults(er);
 	}
 	
-	@GetMapping("api/prescription/{id}")
+	@GetMapping("api/prescriptions/{id}")
 	public List<PrescriptionDTO> listMedicine(@PathVariable int id) {
 		List<Prescription> ps = prescriptionService.findByPatientId(id);
 		List<PrescriptionDTO> psdtos = new ArrayList<>(ps.size());
@@ -128,13 +128,14 @@ public class patient {
 		return psdtos;
 	}
 	
-	@PostMapping("api/prescription/{id}")
-	public Prescription addMedicine(@PathVariable int id, @RequestBody int idMedicine, @RequestBody int quantity) {
-		Prescription p = new Prescription();
-		p.getPatient().setId(id);
-		p.getMedicine().setIdMedicine(idMedicine);
-		p.setQuantity(quantity);
-		return prescriptionService.save(p);
+	@PostMapping("api/prescriptions")
+	public Prescription addNewPrescription(@RequestBody Prescription prescription) {
+		return prescriptionService.addNewPrecription(prescription);
+	}
+	
+	@DeleteMapping("api/prescriptions")
+	public void deletePrescription(@RequestBody Prescription prescription) {
+		prescriptionService.deletePrescription(prescription);
 	}
 	
 	@GetMapping("api/patients/search")

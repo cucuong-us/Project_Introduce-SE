@@ -28,12 +28,16 @@ public class Prescription {
 	
 	private int quantity;
 	
+	public int getId() {
+		return id;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="idPatient", insertable = false, updatable = false)
+	@JoinColumn(name="idPatient")
 	private Patient patient;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="idMedicine", insertable = false, updatable = false)
+	@JoinColumn(name="idMedicine", referencedColumnName = "idMedicine")
 	private Medicine medicine;
 
 	public int getQuantity() {

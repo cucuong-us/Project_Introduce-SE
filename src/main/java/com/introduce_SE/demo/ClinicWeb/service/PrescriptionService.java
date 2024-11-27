@@ -18,7 +18,11 @@ public class PrescriptionService {
 		return prescriptionRepository.findByPatientId(idPatient);
 	}
 	
-	public Prescription save(Prescription p) {
+	public Prescription addNewPrecription(Prescription p) {
 		return prescriptionRepository.save(p);
+	}
+	
+	public void deletePrescription(Prescription p) {
+		prescriptionRepository.deleteById(p.getId());
 	}
 }
