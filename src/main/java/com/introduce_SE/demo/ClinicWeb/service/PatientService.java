@@ -47,4 +47,8 @@ public class PatientService {
 	public List<Patient> searchPatients(Integer idPatient, String fullname, LocalDate date) {
 		return patientRepository.searchPatients(idPatient, fullname, date);
 	}
+	
+	public int countByDate(LocalDate date) {
+		return patientRepository.countByDate(date);
+	}
 }

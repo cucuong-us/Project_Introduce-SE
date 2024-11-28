@@ -1,5 +1,6 @@
 package com.introduce_SE.demo.ClinicWeb.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class PrescriptionService {
 	
 	public void deletePrescription(Prescription p) {
 		prescriptionRepository.deleteById(p.getId());
+	}	
+	
+	public float revenuePerDay(LocalDate date) {
+		return prescriptionRepository.revenuePerDay(date);
+	}
+	
+	public float  revenuePerMonth(LocalDate date) {
+		return prescriptionRepository.revenuePerMonth(date.getMonthValue());
 	}
 }

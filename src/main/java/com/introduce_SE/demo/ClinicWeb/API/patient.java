@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.introduce_SE.demo.ClinicWeb.dto.ExaminationResultsDTO;
 import com.introduce_SE.demo.ClinicWeb.dto.PrescriptionDTO;
+import com.introduce_SE.demo.ClinicWeb.dto.revenueDTO;
+import com.introduce_SE.demo.ClinicWeb.model.Configuration;
 import com.introduce_SE.demo.ClinicWeb.model.ExaminationResults;
 import com.introduce_SE.demo.ClinicWeb.model.Medicine;
 import com.introduce_SE.demo.ClinicWeb.model.Patient;
 import com.introduce_SE.demo.ClinicWeb.model.Prescription;
+import com.introduce_SE.demo.ClinicWeb.service.ConfigurationService;
 import com.introduce_SE.demo.ClinicWeb.service.DiseaseService;
 import com.introduce_SE.demo.ClinicWeb.service.ExaminationResultsService;
 import com.introduce_SE.demo.ClinicWeb.service.MedicineService;
@@ -44,6 +47,9 @@ public class patient {
 	
 	@Autowired
 	private DiseaseService diseaseService;
+	
+	@Autowired
+	private ConfigurationService configurationService;
 	
 	@PostMapping("/api/patients")
 	public Patient addNewPatient(@RequestBody Patient patient){
@@ -85,7 +91,7 @@ public class patient {
 // 		@RequestBody Map<String, Object> request
 //		ExaminationResults er = new ExaminationResults();
 		
-//		int idPatient = er.getPatient().getId();
+//		int idPatient = request.getPatient().getId();
 //		Optional<Patient> patient = patientService.findById(idPatient);
 //		
 //		if(patient.isEmpty()) {
@@ -143,5 +149,20 @@ public class patient {
 	@RequestParam(required=false) String fullname, 
 	@RequestParam(required=false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
 		return patientService.searchPatients(id, fullname, date);
+	}
+	
+	@GetMapping("api/revenue")
+	public revenueDTO revenuePerDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  date) {
+		revenueDTO r = new revenueDTO();
+		r.setDate(date);
+		r.setNumberOfPatient(patientService.countByDate(date));
+		Optional<Configuration> c = configurationService.findById(1);
+		int exPrice = c.get().getExaminationPrice();
+		float revenueDay = prescriptionService.revenuePerDay(date);
+		float revenueMonth = prescriptionService.revenuePerMonth(date);
+		r.setRate(revenueDay/revenueMonth);
+		revenueDay = revenueDay + exPrice*r.getNumberOfPatient();
+		r.setRevenue(revenueDay);
+		return r;
 	}
 }
