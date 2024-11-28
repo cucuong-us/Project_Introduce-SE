@@ -21,4 +21,6 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 	public List<Patient> searchPatients(@Param("id") Integer id,
             @Param("fullname") String fullname,
             @Param("date") LocalDate date);
+	
+	public int countByDate(LocalDate date);
 }
