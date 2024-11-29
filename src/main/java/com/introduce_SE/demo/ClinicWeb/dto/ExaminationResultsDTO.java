@@ -1,20 +1,31 @@
 package com.introduce_SE.demo.ClinicWeb.dto;
 
+import java.time.LocalDate;
+
 public class ExaminationResultsDTO {
 	
-	public ExaminationResultsDTO() {
-		
-	}
-
-	public ExaminationResultsDTO(String fullName, String symptom, String disease) {
+	public ExaminationResultsDTO(String fullName, String symptom, String disease, LocalDate date) {
 		super();
 		this.fullName = fullName;
 		this.symptom = symptom;
 		this.disease = disease;
+		this.date = date;
 	}
+	public ExaminationResultsDTO() {
+		
+	}
+	
 	private String fullName;
 	private String symptom;
 	private String disease;
+	private LocalDate date;
+	
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 	public String getFullName() {
 		return fullName;
 	}

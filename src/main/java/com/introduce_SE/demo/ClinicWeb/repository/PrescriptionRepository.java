@@ -13,6 +13,15 @@ import com.introduce_SE.demo.ClinicWeb.model.Prescription;
 @Repository
 public interface PrescriptionRepository extends JpaRepository<Prescription, Integer>{
 	public List<Prescription> findByPatientId(int id);
+
+	@Query(value="select sum(m.price*p.quantity) "
+			+ "from clinicweb.prescription p "
+			+ "join clinicweb.patient pa on pa.id_patient = p.id_patient "
+			+ "join clinicweb.medicine m on p.id_medicine = m.id_medicine "
+			+ "where pa.id_patient = :id "
+			+ "group by pa.id_patient",
+			nativeQuery = true)
+	public float medicinePrice(@Param("id") int id);
 	
 	@Query(value="select sum(m.price*p.quantity) "
 			+ "from prescription p "
@@ -25,10 +34,11 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
 	
 	@Query(value="select sum(m.price*p.quantity) "
 			+ "from prescription p "
-			+ "join patient pa on pa.id_patient = p.id_patient "
+			+ "join patient pa on pa.id_patient = p.id_patient "	
 			+ "join medicine m on p.id_medicine = m.id_medicine "
 			+ "where month(pa.date) = :month "
 			+ "group by month(pa.date)",
 			nativeQuery = true)
 	public float revenuePerMonth(@Param("month") int month);
+	
 }
