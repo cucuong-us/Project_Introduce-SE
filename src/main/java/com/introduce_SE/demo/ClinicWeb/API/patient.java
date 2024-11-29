@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.introduce_SE.demo.ClinicWeb.dto.ExaminationResultsDTO;
+import com.introduce_SE.demo.ClinicWeb.dto.InvoiceDTO;
 import com.introduce_SE.demo.ClinicWeb.dto.PrescriptionDTO;
 import com.introduce_SE.demo.ClinicWeb.dto.revenueDTO;
 import com.introduce_SE.demo.ClinicWeb.model.Configuration;
@@ -51,20 +52,27 @@ public class patient {
 	@Autowired
 	private ConfigurationService configurationService;
 	
+	//----------------------------------------------LAP DANH SACH BENH NHAN---------------------------------------------------------
+
 	@PostMapping("/api/patients")
 	public Patient addNewPatient(@RequestBody Patient patient){
 		return patientService.addPatient(patient);
 	}
 	
 	@GetMapping("/api/patients")
-	public List<Patient> listPatients() {
-		return patientService.findAll();
+	public List<Patient> listPatients(@RequestParam LocalDate date) {
+		return patientService.findByDate(date);
 	}
 	
 	@DeleteMapping("/api/patients/{id}")
 	public void deletePatient(@PathVariable int id) {
 		patientService.deleteById(id);
 	}
+	
+	
+	
+	
+	//------------------------------------------------LAP PHIEU KHAM BENH---------------------------------------------------------
 	
 	
 	@GetMapping("api/examinationResults/{id}")
@@ -76,6 +84,7 @@ public class patient {
 			return erdto;
 		}
 		erdto.setFullName(patient.get().getFullname());
+		erdto.setDate(patient.get().getDate());
 		
 		Optional<ExaminationResults> er = examinationResultsService.findByID(id);
 		if(er.isEmpty()) return erdto;
@@ -144,6 +153,11 @@ public class patient {
 		prescriptionService.deletePrescription(prescription);
 	}
 	
+	
+	//------------------------------------------------TRA CUU BENH NHAN---------------------------------------------------------
+	
+	
+	
 	@GetMapping("api/patients/search")
 	public List<Patient> getPatient(@RequestParam(required=false) Integer id, 
 	@RequestParam(required=false) String fullname, 
@@ -151,7 +165,23 @@ public class patient {
 		return patientService.searchPatients(id, fullname, date);
 	}
 	
-	@GetMapping("api/revenue")
+	
+	
+	//------------------------------------------------LAP HOA DON THANH TOAN---------------------------------------------------------
+	
+	@GetMapping("api/invoice/{id}")
+	public InvoiceDTO getInvoice(@PathVariable int id) {
+		InvoiceDTO i = new InvoiceDTO();
+		i.setExPrice(configurationService.findById(1).get().getExaminationPrice());
+		i.setMedicinePrice(prescriptionService.medicinePrice(id));
+		i.setTotal(i.getMedicinePrice()+i.getExPrice());
+		return i;
+	}
+	
+	//------------------------------------------------LAP BAO CAO THANG---------------------------------------------------------
+	
+	
+	@GetMapping("api/report/revenue")
 	public revenueDTO revenuePerDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  date) {
 		revenueDTO r = new revenueDTO();
 		r.setDate(date);
