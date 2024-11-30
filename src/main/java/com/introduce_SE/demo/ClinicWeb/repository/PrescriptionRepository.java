@@ -34,7 +34,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
 	
 	@Query(value="select sum(m.price*p.quantity) "
 			+ "from prescription p "
-			+ "join patient pa on pa.id_patient = p.id_patient "	
+			+ "join patient pa on pa.id_patient = p.id_patient "
 			+ "join medicine m on p.id_medicine = m.id_medicine "
 			+ "where month(pa.date) = month(:date) and year(pa.date) = year(:date) "
 			+ "group by month(date), year(date)",

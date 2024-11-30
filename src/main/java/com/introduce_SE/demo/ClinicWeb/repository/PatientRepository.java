@@ -23,4 +23,11 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
             @Param("date") LocalDate date);
 	
 	public int countByDate(LocalDate date);
+	
+	@Query(value="select count(*) "
+			+ "from patient p "
+			+ "join prescription pe on p.id_patient = pe.id_patient "
+			+ "where month(p.date) = month(:date) and year(p.date) = year(:date)",
+			nativeQuery=true)
+	public int countByMonth(LocalDate date);
 }

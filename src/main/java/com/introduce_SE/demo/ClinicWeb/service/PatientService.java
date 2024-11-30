@@ -51,4 +51,8 @@ public class PatientService {
 	public int countByDate(LocalDate date) {
 		return patientRepository.countByDate(date);
 	}
+	
+	public int countByMonth(LocalDate date) {
+		return patientRepository.countByMonth(date);
+	}
 }

@@ -182,9 +182,17 @@ public class patient {
 	
 	
 	@GetMapping("api/report/revenue")
-	public revenueDTO revenuePerDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  date) {
+	public revenueDTO revenuePerDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
 		revenueDTO r = new revenueDTO();
 		r.setDate(date);
+		
+		if(patientService.countByMonth(date) == 0) {
+			r.setNumberOfPatient(0);
+			r.setRate(0);
+			r.setRevenue(0);
+			return r;
+		}		
+		
 		r.setNumberOfPatient(patientService.countByDate(date));
 		Optional<Configuration> c = configurationService.findById(1);
 		int exPrice = c.get().getExaminationPrice();
@@ -198,4 +206,6 @@ public class patient {
 		r.setRevenue(revenueDay);
 		return r;
 	}
+	
+	
 }
