@@ -31,8 +31,8 @@ public class PrescriptionService {
 		return prescriptionRepository.revenuePerDay(date);
 	}
 	
-	public float  revenuePerMonth(LocalDate date) {
-		return prescriptionRepository.revenuePerMonth(date.getMonthValue());
+	public float revenuePerMonth(LocalDate date) {
+		return prescriptionRepository.revenuePerMonth(date);
 	}
 	
 	public float medicinePrice(int id) {
