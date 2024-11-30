@@ -3,6 +3,8 @@ package com.introduce_SE.demo.ClinicWeb.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -43,9 +45,11 @@ public class Patient {
 	private LocalDate date;
 	
 	@OneToMany(mappedBy = "patient")
+	@JsonIgnore
 	private List<ExaminationResults> examinationResults;
 	
 	@OneToMany(mappedBy = "patient")
+	@JsonIgnore
 	private List<Prescription> prescriptions;
 
 	public int getId() {
@@ -94,22 +98,6 @@ public class Patient {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}
-
-	public List<ExaminationResults> getExaminationResults() {
-		return examinationResults;
-	}
-
-	public void setExaminationResults(List<ExaminationResults> examinationResults) {
-		this.examinationResults = examinationResults;
-	}
-
-	public List<Prescription> getPrescriptions() {
-		return prescriptions;
-	}
-
-	public void setPrescriptions(List<Prescription> prescriptions) {
-		this.prescriptions = prescriptions;
 	}
 
 	

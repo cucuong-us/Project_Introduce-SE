@@ -188,7 +188,10 @@ public class patient {
 		r.setNumberOfPatient(patientService.countByDate(date));
 		Optional<Configuration> c = configurationService.findById(1);
 		int exPrice = c.get().getExaminationPrice();
-		float revenueDay = prescriptionService.revenuePerDay(date);
+		float revenueDay = 0;
+		if(r.getNumberOfPatient() != 0) {
+			revenueDay = prescriptionService.revenuePerDay(date);
+		}
 		float revenueMonth = prescriptionService.revenuePerMonth(date);
 		r.setRate(revenueDay/revenueMonth);
 		revenueDay = revenueDay + exPrice*r.getNumberOfPatient();

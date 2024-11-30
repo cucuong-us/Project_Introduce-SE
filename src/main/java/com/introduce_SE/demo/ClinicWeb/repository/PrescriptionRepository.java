@@ -23,7 +23,7 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
 			nativeQuery = true)
 	public float medicinePrice(@Param("id") int id);
 	
-	@Query(value="select sum(m.price*p.quantity) "
+	@Query(value="select ifnull(sum(m.price*p.quantity),0.0) "
 			+ "from prescription p "
 			+ "join patient pa on pa.id_patient = p.id_patient "
 			+ "join medicine m on p.id_medicine = m.id_medicine "
@@ -36,9 +36,9 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Inte
 			+ "from prescription p "
 			+ "join patient pa on pa.id_patient = p.id_patient "	
 			+ "join medicine m on p.id_medicine = m.id_medicine "
-			+ "where month(pa.date) = :month "
-			+ "group by month(pa.date)",
+			+ "where month(pa.date) = month(:date) and year(pa.date) = year(:date) "
+			+ "group by month(date), year(date)",
 			nativeQuery = true)
-	public float revenuePerMonth(@Param("month") int month);
+	public float revenuePerMonth(@Param("date") LocalDate date);
 	
 }
