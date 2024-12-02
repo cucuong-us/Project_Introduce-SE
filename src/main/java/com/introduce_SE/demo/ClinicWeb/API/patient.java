@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.introduce_SE.demo.ClinicWeb.dto.ExaminationResultsDTO;
 import com.introduce_SE.demo.ClinicWeb.dto.InvoiceDTO;
+import com.introduce_SE.demo.ClinicWeb.dto.MedicineDTO;
 import com.introduce_SE.demo.ClinicWeb.dto.PrescriptionDTO;
-import com.introduce_SE.demo.ClinicWeb.dto.revenueDTO;
+import com.introduce_SE.demo.ClinicWeb.dto.RevenueDTO;
 import com.introduce_SE.demo.ClinicWeb.model.Configuration;
 import com.introduce_SE.demo.ClinicWeb.model.ExaminationResults;
 import com.introduce_SE.demo.ClinicWeb.model.Medicine;
@@ -182,9 +183,17 @@ public class patient {
 	
 	
 	@GetMapping("api/report/revenue")
-	public revenueDTO revenuePerDay(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  date) {
-		revenueDTO r = new revenueDTO();
+	public RevenueDTO revenueReport(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+		RevenueDTO r = new RevenueDTO();
 		r.setDate(date);
+		
+		if(patientService.countByMonth(date) == 0) {
+			r.setNumberOfPatient(0);
+			r.setRate(0);
+			r.setRevenue(0);
+			return r;
+		}		
+		
 		r.setNumberOfPatient(patientService.countByDate(date));
 		Optional<Configuration> c = configurationService.findById(1);
 		int exPrice = c.get().getExaminationPrice();
@@ -197,5 +206,18 @@ public class patient {
 		revenueDay = revenueDay + exPrice*r.getNumberOfPatient();
 		r.setRevenue(revenueDay);
 		return r;
+	}
+	
+	@GetMapping("api/report/medicine")
+	public List<MedicineDTO> revenueMedicine(@RequestParam int month, @RequestParam int year) {
+		List<MedicineDTO> m = new ArrayList<>();
+		LocalDate date = LocalDate.of(year, month, 1);
+		
+		if(patientService.countByMonth(date) == 0) {
+			return m;
+		}
+		
+		m = prescriptionService.revenueMedicine(date);
+		return m;
 	}
 }

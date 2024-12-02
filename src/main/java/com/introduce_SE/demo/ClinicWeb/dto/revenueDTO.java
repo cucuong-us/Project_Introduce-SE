@@ -2,9 +2,9 @@ package com.introduce_SE.demo.ClinicWeb.dto;
 
 import java.time.LocalDate;
 
-public class revenueDTO {
+public class RevenueDTO {
 
-	public revenueDTO() {
+	public RevenueDTO() {
 		
 	}
 	
