@@ -2,6 +2,8 @@ package com.introduce_SE.demo.ClinicWeb.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,7 @@ public class Disease {
 	
 
 	@OneToMany(mappedBy="disease")
+	@JsonIgnore
 	private List<ExaminationResults> examinationResults;
 	
 	public void setId(int id) {
