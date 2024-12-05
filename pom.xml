@@ -79,7 +79,6 @@
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-			<!-- Hoặc phiên bản mới hơn -->
 		</dependency>
 		<dependency>
 			<groupId>jakarta.servlet.jsp</groupId>
