@@ -56,8 +56,7 @@ public class patient {
 	@Autowired
 	private ConfigurationService configurationService;
 
-	// ----------------------------------------------LAP DANH SACH BENH
-	// NHAN---------------------------------------------------------
+	// ----------------------------------------------LAP DANH SACH BENH NHAN---------------------------------------------------------
 
 	@PostMapping("/api/patients")
 	public Patient addNewPatient(@RequestBody Patient patient) {
@@ -74,8 +73,7 @@ public class patient {
 		patientService.deleteById(id);
 	}
 
-	// ------------------------------------------------LAP PHIEU KHAM
-	// BENH---------------------------------------------------------
+	// ------------------------------------------------LAP PHIEU KHAM BENH---------------------------------------------------------
 
 	@GetMapping("api/examinationResults/{id}")
 	public ExaminationResultsDTO getExaminationResults(@PathVariable int id) {
@@ -156,8 +154,7 @@ public class patient {
 		prescriptionService.deletePrescription(prescription);
 	}
 
-	// ------------------------------------------------TRA CUU BENH
-	// NHAN---------------------------------------------------------
+	// ------------------------------------------------TRA CUU BENH NHAN---------------------------------------------------------
 
 	@GetMapping("api/patients/search")
 	public List<Patient> getPatient(@RequestParam(required = false) Integer id,
@@ -166,8 +163,7 @@ public class patient {
 		return patientService.searchPatients(id, fullname, date);
 	}
 
-	// ------------------------------------------------LAP HOA DON THANH
-	// TOAN---------------------------------------------------------
+	// ------------------------------------------------LAP HOA DON THANH TOAN---------------------------------------------------------
 
 	@GetMapping("api/invoice/{id}")
 	public InvoiceDTO getInvoice(@PathVariable int id) {
@@ -178,8 +174,7 @@ public class patient {
 		return i;
 	}
 
-	// ------------------------------------------------LAP BAO CAO
-	// THANG---------------------------------------------------------
+	// ------------------------------------------------LAP BAO CAO THANG---------------------------------------------------------
 
 	@GetMapping("api/report/revenue")
 	public RevenueDTO revenueReport(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
@@ -220,8 +215,7 @@ public class patient {
 		return m;
 	}
 
-	// ------------------------------------------------THAY DOI QUY
-	// DINH---------------------------------------------------------
+	// ------------------------------------------------THAY DOI QUY DINH---------------------------------------------------------
 
 	// -------------THUOC-------------------
 	@GetMapping("api/medicine")
