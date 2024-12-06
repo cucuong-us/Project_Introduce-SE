@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Disease {
 	private String name;
 	
 
-	@OneToMany(mappedBy="disease")
+	@OneToMany(mappedBy="disease", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JsonIgnore
 	private List<ExaminationResults> examinationResults;
 	

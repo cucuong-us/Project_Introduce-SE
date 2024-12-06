@@ -40,7 +40,7 @@ public class SpringSecurityConfiguration {
 																											// truy cập
 																											// không cần
 																											// login
-						.anyRequest().authenticated() // Các request khác cần login
+						.anyRequest().permitAll() // Các request khác cần login
 				).formLogin(form -> form//.loginPage("/login") // URL trang login tùy chỉnh
 						.loginProcessingUrl("/doLogin") // URL xử lý login
 						.defaultSuccessUrl("/home") // URL chuyển hướng sau khi login thành công
