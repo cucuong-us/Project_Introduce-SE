@@ -17,13 +17,7 @@ public class PatientService {
 	@Autowired
 	private PatientRepository patientRepository;
 	
-	public int generatePatientId() {
-		long count = patientRepository.count();
-		return (int) (10000+count);
-	}
-	
 	public Patient addPatient(Patient patient) {
-		patient.setId(generatePatientId());
 		patient.setDate(LocalDate.now());
 		return patientRepository.save(patient);
 	}
