@@ -164,7 +164,7 @@ public class patient {
 	}
 
 	// ------------------------------------------------LAP HOA DON THANH TOAN---------------------------------------------------------
-
+	
 	@GetMapping("api/invoice/{id}")
 	public InvoiceDTO getInvoice(@PathVariable int id) {
 		InvoiceDTO i = new InvoiceDTO();
@@ -172,6 +172,11 @@ public class patient {
 		i.setMedicinePrice(prescriptionService.medicinePrice(id));
 		i.setTotal(i.getMedicinePrice() + i.getExPrice());
 		return i;
+	}
+	
+	@GetMapping("api/invoice/patients")
+	public List<Patient> getExaminedPatients(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+		return examinationResultsService.getExaminedPatients(date);
 	}
 
 	// ------------------------------------------------LAP BAO CAO THANG---------------------------------------------------------
