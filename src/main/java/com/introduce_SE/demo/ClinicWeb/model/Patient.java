@@ -16,8 +16,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Patient {
 	
-	public Patient(int idPatient, String fullname, String sex, String address, int yearOfBirth, LocalDate date,
-			List<ExaminationResults> examinationResults, List<Prescription> prescriptions) {
+	public Patient(int idPatient, String fullname, String sex, String address, int yearOfBirth, LocalDate date) {
 		super();
 		this.idPatient = idPatient;
 		this.fullname = fullname;
@@ -25,8 +24,6 @@ public class Patient {
 		this.address = address;
 		this.yearOfBirth = yearOfBirth;
 		this.date = date;
-		this.examinationResults = examinationResults;
-		this.prescriptions = prescriptions;
 	}
 
 	public Patient() {
