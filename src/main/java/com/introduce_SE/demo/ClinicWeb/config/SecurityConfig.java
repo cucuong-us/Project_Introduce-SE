@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 	
-	private final String[]  PUBLIC_ENDPOINTS = {"/api/token", "/api/introspect"};
+	private final String[]  PUBLIC_ENDPOINTS = {"/api/token", "/api/introspect","swagger-ui/**"};
 	
 	@Value("${jwt.signerKey}")
 	private String signerKey;
