@@ -15,7 +15,7 @@ import com.introduce_SE.demo.ClinicWeb.model.ExaminationResults;
 public interface ExaminationResultsRepository extends JpaRepository<ExaminationResults, Integer> {
 	public Optional<ExaminationResults> findByPatientId(int idPatient);
 	
-	@Query(value="select p.id_patient, p.date, p.address, p.fullname, p.sex, p.year_of_birth "
+	@Query(value="select distinct(p.id_patient), p.date, p.address, p.fullname, p.sex, p.year_of_birth "
 			+ "from examination_results er "
 			+ "join patient p on er.patient = p.id_patient "
 			+ "join prescription pr on pr.id_patient = er.patient "
