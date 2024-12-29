@@ -131,7 +131,8 @@ public class patient {
 		List<PrescriptionDTO> psdtos = new ArrayList<>(ps.size());
 		for (int i = 0; i < ps.size(); i++) {
 			PrescriptionDTO psdto = new PrescriptionDTO();
-
+			
+			psdto.setId(ps.get(i).getId());
 			psdto.setQuantity(ps.get(i).getQuantity());
 			Optional<Medicine> medicine = medicineService.findById(ps.get(i).getMedicine().getIdMedicine());
 			psdto.setNameOfMedicine(medicine.get().getNameOfMedicine());
