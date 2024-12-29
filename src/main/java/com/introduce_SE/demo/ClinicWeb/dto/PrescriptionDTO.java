@@ -2,8 +2,11 @@ package com.introduce_SE.demo.ClinicWeb.dto;
 
 public class PrescriptionDTO {
 	
-	public PrescriptionDTO(String nameOfMedicine, int price, String unit, int quantity, String medicineUsage) {
+	
+
+	public PrescriptionDTO(int id, String nameOfMedicine, int price, String unit, int quantity, String medicineUsage) {
 		super();
+		this.id = id;
 		this.nameOfMedicine = nameOfMedicine;
 		this.price = price;
 		this.unit = unit;
@@ -22,12 +25,21 @@ public class PrescriptionDTO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	
+	private int id;
 	private String nameOfMedicine;
 	private int price;
 	private String unit;
 	private int quantity;
 	private String medicineUsage;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNameOfMedicine() {
 		return nameOfMedicine;
 	}
