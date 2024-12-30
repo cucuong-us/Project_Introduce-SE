@@ -89,7 +89,8 @@ public class patient {
 		Optional<ExaminationResults> er = examinationResultsService.findByID(id);
 		if (er.isEmpty())
 			return erdto;
-
+		
+		erdto.setId(er.get().getId());
 		erdto.setSymptom(er.get().getSymptom());
 		erdto.setDisease(er.get().getDisease().getName());
 		return erdto;
