@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 public class ExaminationResultsDTO {
 	
-	public ExaminationResultsDTO(String fullName, String symptom, String disease, LocalDate date) {
+	
+	public ExaminationResultsDTO(int id, String fullName, String symptom, String disease, LocalDate date) {
 		super();
+		this.id = id;
 		this.fullName = fullName;
 		this.symptom = symptom;
 		this.disease = disease;
@@ -15,11 +17,18 @@ public class ExaminationResultsDTO {
 		
 	}
 	
+	private int id;
 	private String fullName;
 	private String symptom;
 	private String disease;
 	private LocalDate date;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public LocalDate getDate() {
 		return date;
 	}
