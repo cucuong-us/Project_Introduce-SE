@@ -154,6 +154,11 @@ public class patient {
 	public void deletePrescription(@RequestBody Prescription prescription) {
 		prescriptionService.deletePrescription(prescription);
 	}
+	
+	@DeleteMapping("api/examinationResults")
+	public void deleteExaminationResults(@RequestBody ExaminationResults examinationResults) {
+		examinationResultsService.deleteById(examinationResults.getId());
+	}
 
 	// ------------------------------------------------TRA CUU BENH NHAN---------------------------------------------------------
 

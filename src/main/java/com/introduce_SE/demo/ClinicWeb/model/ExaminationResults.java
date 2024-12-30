@@ -36,6 +36,14 @@ public class ExaminationResults {
 	@JoinColumn(name="disease", referencedColumnName = "id")
 	private Disease disease;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getSymptom() {
 		return symptom;
 	}

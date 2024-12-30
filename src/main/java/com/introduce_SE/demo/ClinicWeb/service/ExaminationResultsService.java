@@ -46,4 +46,8 @@ public class ExaminationResultsService {
 	    
 	    return p;
 	}
+
+	public void deleteById(int id) {
+		examinationResultsRepository.deleteById(id);;
+	}
 }
